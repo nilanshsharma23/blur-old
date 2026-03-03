@@ -1,11 +1,11 @@
+import 'package:blur/classes/post_object.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Post extends StatelessWidget {
-  const Post({super.key, required this.dateTime, required this.content});
+  const Post({super.key, required this.postObject});
 
-  final DateTime dateTime;
-  final String content;
+  final PostObject postObject;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +21,10 @@ class Post extends StatelessWidget {
         spacing: 16,
         children: [
           Text(
-            "${DateFormat.yMd('en_IN').format(dateTime)} ${DateFormat.jm().format(dateTime)}",
+            "${DateFormat.yMd('en_IN').format(postObject.createdAt)} ${DateFormat.jm().format(postObject.createdAt)}",
             style: TextStyle(fontSize: 16, color: Color.fromARGB(104, 1, 1, 0)),
           ),
-          SelectableText(content, style: TextStyle(fontSize: 16)),
+          SelectableText(postObject.content, style: TextStyle(fontSize: 16)),
         ],
       ),
     );

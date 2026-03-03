@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CreatePostPage extends StatefulWidget {
   const CreatePostPage({super.key});
@@ -11,6 +13,9 @@ class CreatePostPage extends StatefulWidget {
 
 class _CreatePostPageState extends State<CreatePostPage> {
   final formKey = GlobalKey<FormState>();
+  TextEditingController contentController = TextEditingController();
+
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +47,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
 
                     return null;
                   },
+                  controller: contentController,
                   decoration: InputDecoration(
                     fillColor: Theme.of(context).colorScheme.surfaceContainer,
                     filled: true,
@@ -70,8 +76,29 @@ class _CreatePostPageState extends State<CreatePostPage> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {}
+                    onPressed: () async {
+                      if (!formKey.currentState!.validate()) {
+                        return;
+                      }
+
+                      setState(() {
+                        loading = true;
+                      });
+
+                      FirebaseFirestore db = FirebaseFirestore.instance;
+
+                      await db.collection('posts').add({
+                        'content': contentController.text,
+                        'created_at': DateTime.now(),
+                      });
+
+                      if (context.mounted) {
+                        context.pop();
+                      }
+
+                      setState(() {
+                        loading = false;
+                      });
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -81,13 +108,18 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         ),
                       ),
                     ),
-                    child: Text(
-                      "Post",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                    ),
+                    child: loading
+                        ? CircularProgressIndicator(
+                            color: Theme.of(context).colorScheme.onSurface,
+                            padding: EdgeInsets.all(8),
+                          )
+                        : Text(
+                            "Post",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
+                          ),
                   ),
                 ),
               ],

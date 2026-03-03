@@ -1,3 +1,5 @@
+import 'package:blur/classes/post_object.dart';
+import 'package:blur/methods/get_posts.dart';
 import 'package:blur/widgets/post.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +19,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.transparent,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           context.push('/create-post');
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -28,22 +30,36 @@ class HomePage extends StatelessWidget {
         ),
         child: Icon(Icons.add),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsetsGeometry.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            spacing: 16,
-            children: List.generate(
-              4,
-              (index) => Post(
-                dateTime: DateTime(2009, 9, 23, 17, 38),
-                content:
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      body: FutureBuilder(
+        future: getPosts(),
+        builder: (context, asyncSnapshot) {
+          if (asyncSnapshot.hasData) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  spacing: 16,
+                  children: List.generate(
+                    asyncSnapshot.data!.length,
+                    (index) => Post(
+                      postObject: PostObject(
+                        createdAt: asyncSnapshot.data![index].createdAt,
+                        content: asyncSnapshot.data![index].content,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+            );
+          }
+        },
       ),
     );
   }
