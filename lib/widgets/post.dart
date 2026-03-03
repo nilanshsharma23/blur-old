@@ -24,7 +24,7 @@ class Post extends StatelessWidget {
             "${DateFormat.yMd('en_IN').format(dateTime)} ${DateFormat.jm().format(dateTime)}",
             style: TextStyle(fontSize: 16, color: Color.fromARGB(104, 1, 1, 0)),
           ),
-          Text(content, style: TextStyle(fontSize: 16)),
+          SelectableText(content, style: TextStyle(fontSize: 16)),
         ],
       ),
     );

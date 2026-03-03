@@ -1,5 +1,6 @@
 import 'package:blur/widgets/post.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,7 +17,9 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.transparent,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.push('/create-post');
+        },
         backgroundColor: Theme.of(context).colorScheme.primary,
         elevation: 4,
         shape: RoundedRectangleBorder(
