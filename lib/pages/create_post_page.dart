@@ -45,8 +45,12 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       return 'Please enter something.';
                     }
 
-                    if (value.length >= 500) {
+                    if (value.length >= 200) {
                       return 'Too much';
+                    }
+
+                    if (value.toLowerCase().contains('epstein')) {
+                      return 'Only limit to free speech.';
                     }
 
                     return null;
