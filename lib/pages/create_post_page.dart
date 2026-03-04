@@ -45,6 +45,10 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       return 'Please enter something.';
                     }
 
+                    if (value.length >= 500) {
+                      return 'Too much';
+                    }
+
                     return null;
                   },
                   controller: contentController,
