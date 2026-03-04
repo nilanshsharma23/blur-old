@@ -89,29 +89,6 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         return;
                       }
 
-                      if (contentController.text.toLowerCase().contains(
-                        "epstein",
-                      )) {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text(
-                                "This is the only exception to free speech.",
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context, 'OK'),
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-
-                        return;
-                      }
-
                       setState(() {
                         loading = true;
                       });
