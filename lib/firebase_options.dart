@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCvjiGY9oFouMIeCzgvECmQAh1GRgPvTFw',
-    appId: '1:306785406497:android:89397575a2fc08d9039d60',
+    appId: '1:306785406497:android:b5d21e10ee3aafd4039d60',
     messagingSenderId: '306785406497',
     projectId: 'blur-841d8',
     storageBucket: 'blur-841d8.firebasestorage.app',

@@ -1,4 +1,4 @@
-package com.example.blur
+package com.pyscrap.blur
 
 import io.flutter.embedding.android.FlutterActivity
 
