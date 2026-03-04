@@ -4,8 +4,21 @@ import 'package:blur/widgets/post.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late Future<List<PostObject>> getPostsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    getPostsFuture = getPosts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +30,20 @@ class HomePage extends StatelessWidget {
         ),
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                getPostsFuture = getPosts();
+                debugPrint("Here");
+              });
+            },
+            icon: Icon(
+              Icons.replay,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -31,7 +58,7 @@ class HomePage extends StatelessWidget {
         child: Icon(Icons.add),
       ),
       body: FutureBuilder(
-        future: getPosts(),
+        future: getPostsFuture,
         builder: (context, asyncSnapshot) {
           if (asyncSnapshot.hasData) {
             return SingleChildScrollView(
