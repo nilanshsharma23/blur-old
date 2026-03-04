@@ -50,21 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCvjiGY9oFouMIeCzgvECmQAh1GRgPvTFw',
-    appId: '1:306785406497:android:b5d21e10ee3aafd4039d60',
-    messagingSenderId: '306785406497',
-    projectId: 'blur-841d8',
-    storageBucket: 'blur-841d8.firebasestorage.app',
+    apiKey: 'AIzaSyDrNQ0C5RJP8vufcuyhN_CT7VQnf38xnBA',
+    appId: '1:332531762644:android:f8a02679b64d4147714241',
+    messagingSenderId: '332531762644',
+    projectId: 'blur-f1976',
+    storageBucket: 'blur-f1976.firebasestorage.app',
   );
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDg0TQgidIuty_nfq2wSenx8qjmR46YEg8',
-    appId: '1:306785406497:web:511041743f8fb428039d60',
-    messagingSenderId: '306785406497',
-    projectId: 'blur-841d8',
-    authDomain: 'blur-841d8.firebaseapp.com',
-    storageBucket: 'blur-841d8.firebasestorage.app',
-    measurementId: 'G-QD7ZVFKKXB',
+    apiKey: 'AIzaSyBTcdHLvurIJkUSSE6Q38A7UPV7oVu3_IU',
+    appId: '1:332531762644:web:3cb010f198cee8e9714241',
+    messagingSenderId: '332531762644',
+    projectId: 'blur-f1976',
+    authDomain: 'blur-f1976.firebaseapp.com',
+    storageBucket: 'blur-f1976.firebasestorage.app',
+    measurementId: 'G-V9G94ZYPR1',
   );
 
 }

@@ -1,12 +1,14 @@
 import 'package:blur/classes/post_object.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 Future<List<PostObject>> getPosts() async {
   List<PostObject> output = [];
   FirebaseFirestore db = FirebaseFirestore.instance;
 
-  await db.collection('posts').get().then((value) {
+  await db.collection('posts').limit(10).get().then((value) {
     for (var doc in value.docs) {
+      debugPrint(doc.toString());
       output.add(
         PostObject(
           content: doc.data()['content'],
