@@ -18,5 +18,9 @@ Future<List<PostObject>> getPosts() async {
     }
   });
 
+  output.sort((a, b) {
+    return b.createdAt.compareTo(a.createdAt);
+  });
+
   return output;
 }
